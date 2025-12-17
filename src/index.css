@@ -1,0 +1,412 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --gradient-primary: linear-gradient(135deg, #6366f1 0%, #4f46e5 50%, #4338ca 100%);
+    --gradient-secondary: linear-gradient(135deg, #818cf8 0%, #6366f1 100%);
+    --gradient-mesh: radial-gradient(at 40% 20%, hsla(228, 100%, 74%, 0.3) 0px, transparent 50%),
+                     radial-gradient(at 80% 0%, hsla(245, 100%, 66%, 0.2) 0px, transparent 50%),
+                     radial-gradient(at 0% 50%, hsla(225, 100%, 73%, 0.2) 0px, transparent 50%),
+                     radial-gradient(at 80% 50%, hsla(240, 100%, 70%, 0.15) 0px, transparent 50%),
+                     radial-gradient(at 0% 100%, hsla(230, 100%, 77%, 0.2) 0px, transparent 50%);
+    --noise-texture: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: black
+  }
+
+  .dark body {
+    @apply bg-slate-950 text-slate-100;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-semibold tracking-tight;
+  }
+}
+
+@layer components {
+  /* Buttons */
+  .btn {
+    @apply relative inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-xl transition-all duration-300 ease-out;
+    @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500;
+    @apply disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-primary {
+    @apply bg-gradient-to-r from-primary-600 to-primary-700 text-white;
+    @apply hover:from-primary-500 hover:to-primary-600 hover:shadow-lg hover:shadow-primary-500/25;
+    @apply active:scale-[0.98];
+  }
+
+  .btn-secondary {
+    @apply bg-white/10 backdrop-blur-sm border border-primary-200 text-primary-700;
+    @apply dark:bg-slate-800/50 dark:border-primary-500/30 dark:text-primary-300;
+    @apply hover:bg-primary-50 hover:border-primary-300;
+    @apply dark:hover:bg-primary-900/30 dark:hover:border-primary-500/50;
+  }
+
+  .btn-ghost {
+    @apply text-slate-600 hover:text-primary-600 hover:bg-primary-50;
+    @apply dark:text-slate-400 dark:hover:text-primary-400 dark:hover:bg-primary-900/30;
+  }
+
+  /* Input Fields */
+  .input-field {
+    @apply w-full px-4 py-3.5 rounded-xl border-2 transition-all duration-300;
+    @apply bg-white border-slate-200 text-slate-900 placeholder-slate-400;
+    @apply dark:bg-slate-900/50 dark:border-slate-700 dark:text-white dark:placeholder-slate-500;
+    @apply focus:outline-none focus:border-primary-500 focus:ring-4 focus:ring-primary-500/10;
+    @apply dark:focus:border-primary-400 dark:focus:ring-primary-400/20;
+  }
+
+  .input-label {
+    @apply block text-sm font-medium mb-2 text-slate-700 dark:text-slate-300;
+  }
+
+  /* Cards */
+  .card {
+    @apply bg-white rounded-2xl border border-slate-200 shadow-sm;
+    @apply dark:bg-slate-900/50 dark:border-slate-800 dark:shadow-none;
+    @apply backdrop-blur-xl;
+  }
+
+  .card-glass {
+    @apply bg-white/70 backdrop-blur-xl rounded-2xl border border-white/20 shadow-xl;
+    @apply dark:bg-slate-900/70 dark:border-slate-700/50;
+  }
+
+  /* Gradient Backgrounds */
+  .bg-mesh {
+    background-image: var(--gradient-mesh);
+  }
+
+  .bg-noise {
+    position: relative;
+  }
+
+  .bg-noise::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: var(--noise-texture);
+    opacity: 0.03;
+    pointer-events: none;
+  }
+
+  /* Text Gradients */
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-600 via-primary-500 to-primary-700;
+  }
+
+  .text-gradient-shine {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(90deg, #6366f1, #a5b4fc, #6366f1);
+    background-size: 200% auto;
+    animation: shimmer 3s linear infinite;
+  }
+
+  /* Glow Effects */
+  .glow {
+    @apply relative;
+  }
+
+  .glow::after {
+    content: '';
+    @apply absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500;
+    background: radial-gradient(circle at center, rgba(99, 102, 241, 0.15), transparent 70%);
+  }
+
+  .glow:hover::after {
+    @apply opacity-100;
+  }
+
+  /* Navigation */
+  .nav-link {
+    @apply relative px-4 py-2 text-sm font-medium transition-colors duration-200;
+    @apply text-slate-600 hover:text-primary-600;
+    @apply dark:text-slate-400 dark:hover:text-primary-400;
+  }
+
+  .nav-link.active {
+    @apply text-primary-600 dark:text-primary-400;
+  }
+
+  .nav-link.active::after {
+    content: '';
+    @apply absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-primary-500;
+  }
+
+  /* OTP Input */
+  .otp-input {
+    @apply w-12 h-14 text-center text-xl font-semibold rounded-xl border-2 transition-all duration-300;
+    @apply bg-white border-slate-200 text-slate-900;
+    @apply dark:bg-slate-900/50 dark:border-slate-700 dark:text-white;
+    @apply focus:outline-none focus:border-primary-500 focus:ring-4 focus:ring-primary-500/10;
+    @apply dark:focus:border-primary-400 dark:focus:ring-primary-400/20;
+  }
+
+  /* Mobile Menu */
+  .mobile-menu {
+    @apply fixed inset-0 z-50 bg-white dark:bg-slate-950;
+    @apply transform transition-transform duration-300 ease-out;
+  }
+
+  .mobile-menu.closed {
+    @apply translate-x-full;
+  }
+
+  .mobile-menu.open {
+    @apply translate-x-0;
+  }
+
+  /* Floating Shapes */
+  .floating-shape {
+    @apply absolute rounded-full opacity-20 dark:opacity-10 blur-3xl;
+    animation: float 8s ease-in-out infinite;
+  }
+
+  /* Status Badge */
+  .status-badge {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-full;
+  }
+
+  .status-pending {
+    @apply bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400;
+  }
+
+  .status-approved {
+    @apply bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400;
+  }
+
+  .status-rejected {
+    @apply bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400;
+  }
+}
+
+@layer utilities {
+  .animation-delay-100 {
+    animation-delay: 100ms;
+  }
+
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .animation-delay-300 {
+    animation-delay: 300ms;
+  }
+
+  .animation-delay-500 {
+    animation-delay: 500ms;
+  }
+
+  .animation-delay-700 {
+    animation-delay: 700ms;
+  }
+
+  .animation-delay-1000 {
+    animation-delay: 1000ms;
+  }
+
+  /* Scrollbar Styling */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.primary.500') transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply bg-primary-500/50 rounded-full;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary-500;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Perspective for 3D effects */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  /* Safe area insets for mobile */
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* React DatePicker Styling */
+.react-datepicker {
+  padding-top: 0.7rem;
+  padding-left: 1.3rem;
+  max-width: min-content;
+  font-family: inherit;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+.react-datepicker-popper {
+  z-index: 50 !important;
+}
+
+.react-datepicker__header {
+  background-color: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+  border-radius: 0;
+  padding-top: 12px;
+}
+
+.react-datepicker__current-month {
+  font-weight: 600;
+  font-size: 14px;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.react-datepicker__day-name {
+  color: #2a68e3;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.react-datepicker__day {
+  border-radius: 8px;
+  transition: all 0.15s ease;
+}
+
+.react-datepicker__day:hover {
+  background-color: #f3f4f6;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--in-selecting-range,
+.react-datepicker__day--in-range {
+  background-color: #111827 !important;
+  color: white !important;
+}
+
+.react-datepicker__day--in-selecting-range:not(.react-datepicker__day--in-range) {
+  background-color: #e5e7eb !important;
+  color: #374151 !important;
+}
+
+.react-datepicker__day--keyboard-selected {
+  background-color: #6f98e6;;
+  color: #111112;
+}
+
+.react-datepicker__navigation {
+  top: 28px;
+}
+
+.react-datepicker__navigation-icon::before {
+  border-color: #6b7280;
+}
+
+.react-datepicker__navigation:hover *::before {
+  border-color: #111827;
+}
+
+.react-datepicker__month-container {
+  padding: 8px;
+}
+
+
+/* Safe area support for iOS notch and Android gesture bars */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .pb-safe {
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+  }
+  
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Fallback for browsers that don't support safe-area-inset */
+.pb-safe {
+  padding-bottom: 0.75rem;
+}
+
+
+.tri-state-toggle {
+  background: rgba(165,170,174,0.25);
+  box-shadow: inset 0 2px 8px rgba(165,170,174,0.25);
+  border-radius: 24px;
+  display: inline-flex;
+  flex-direction: row;
+  padding: 4px;
+  gap: 1px;
+  transition: all 500ms ease;
+}
+
+.tri-state-toggle a{
+  text-decoration: none;
+}
+
+.tri-state-toggle-button {
+  border-radius: 22px;
+  height: 27px;
+  width: 29px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: 0px;
+  color: #727C8F;
+  cursor: pointer;
+  transition: all .5s ease;
+  font-size: 11px;
+  line-height: 7px;
+}
+
+.tri-state-toggle-button.active {
+  background-image: linear-gradient(-180deg, #fff 0%, #FAFAFA 81%, #F2F2F2 100%);
+  border: 1px solid rgba(207,207,207,0.6);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  color: #6744B1;
+  font-weight: 600;
+}
+
+.language-swich {
+  position: absolute;
+  left: 55%;
+  transform: translateX(-50%);
+}
+
+.tri-state-toggle-button span{
+  margin-bottom: -4px;
+}
