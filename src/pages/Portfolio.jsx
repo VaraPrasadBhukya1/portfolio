@@ -57,7 +57,7 @@ const Portfolio = () => {
       title: "YouTube Multi-Channel Platform",
       subtitle: "Video Distribution at Scale",
       description: "Architected a comprehensive video publishing platform serving 300,000+ subscribers with automated content distribution across multiple channels.",
-      impact: ["300K+ subscribers served", "30M YouTube API credits/day", "9:16 automated video generation", "Multi-template support"],
+      impact: ["300K+ subscribers served", "3 M YouTube API credits/day", "9:16 automated video generation", "Multi-template support"],
       tech: ["React.js", "Node.js", "YouTube Data API", "Automation"],
       icon: Globe,
       gradient: "from-blue-500/20 to-cyan-500/20"
@@ -129,7 +129,7 @@ const Portfolio = () => {
         "Pioneered AI-powered Chrome extension increasing news publish rate by 70%",
         "Created Way2Experts platform connecting 100+ experts with 10,000+ users",
         "Implemented web automation with Selenium, processing 1,000+ YouTube shorts daily",
-        "Raised Google YouTube API quota from 10K to 30M credits/day",
+        "Raised Google YouTube API quota from 10K to 3 M credits/day",
         "Integrated Claude API for grammar correction, hashtag & keyword generation"
       ]
     },
@@ -419,7 +419,7 @@ const Portfolio = () => {
                 <div className="relative group sm:col-span-2 lg:col-span-1">
                   <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-500/20 to-pink-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
                   <div className="relative text-center p-6 sm:p-8 bg-gradient-to-br from-fuchsia-500/10 to-pink-500/5 border border-fuchsia-500/20 rounded-2xl backdrop-blur-sm hover:border-fuchsia-500/40 transition-all duration-300">
-                    <div className="text-4xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-br from-fuchsia-400 to-pink-400 mb-3">30M+</div>
+                    <div className="text-4xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-br from-fuchsia-400 to-pink-400 mb-3">3 M+</div>
                     <div className="text-xs sm:text-sm text-gray-400 font-semibold tracking-wide">API CREDITS/DAY</div>
                   </div>
                 </div>
